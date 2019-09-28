@@ -9,5 +9,20 @@
         android:id="@+id/startFragment"
         android:name="com.example.android.imhungry.StartFragment"
         android:label="@string/start"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_foodFragment"
+            app:destination="@id/foodFragment" />
+    </fragment>
+
+<!--    The fragment that receives the parameters of the action has the args like a route-->
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.example.android.imhungry.FoodFragment"
+        android:label="fragment_food"
+        tools:layout="@layout/fragment_food">
+        <argument
+            android:name="foodType"
+            app:argType="string" />
+    </fragment>
 </navigation>
