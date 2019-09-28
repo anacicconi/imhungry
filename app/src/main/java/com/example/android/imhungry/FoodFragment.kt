@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+// import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import com.example.android.imhungry.databinding.FragmentFoodBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -17,11 +19,25 @@ class FoodFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // add logic to random a food name if it's fit or fat
-        val args = FoodFragmentArgs.fromBundle(arguments!!)
-        Toast.makeText(context, "String: ${args.foodType}", Toast.LENGTH_LONG).show()
+        val binding = DataBindingUtil.inflate<FragmentFoodBinding>(inflater, R.layout.fragment_food, container, false)
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food, container, false)
+        val args = FoodFragmentArgs.fromBundle(arguments!!)
+        //Toast.makeText(context, "String: ${args.foodType}", Toast.LENGTH_LONG).show()
+
+        lateinit var food: Food
+        if (args.foodType === "fit") {
+            food = Food("Banana")
+        }
+
+        if (args.foodType === "fat") {
+            food = Food("Chocolate")
+        }
+
+        binding.food = food
+
+        return binding.root
+
+        //TODO: bind image path (DataBindAdapter)
+        //TODO: add logic to randomly display a food name if it's fit or fat
     }
 }

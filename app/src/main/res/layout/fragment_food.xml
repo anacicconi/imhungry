@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--Data binding layouts have the layout tag and the data tag-->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,8 +8,8 @@
 
     <data>
         <variable
-            name="foodName"
-            type="com.example.android.imhungry.FoodFragment" />
+            name="food"
+            type="com.example.android.imhungry.Food" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +26,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Banana"
+            android:text="@{food.name}"
             android:textAlignment="center"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/foodImg"
