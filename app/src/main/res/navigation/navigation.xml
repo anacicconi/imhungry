@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/foodFragment"
         android:name="com.example.android.imhungry.FoodFragment"
-        android:label="fragment_food"
+        android:label="@string/food_advice"
         tools:layout="@layout/fragment_food">
         <argument
             android:name="foodType"

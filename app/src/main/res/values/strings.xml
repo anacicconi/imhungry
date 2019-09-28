@@ -3,7 +3,8 @@
     <string name="start_text">I\'m feeling:</string>
     <string name="fit">Fit</string>
     <string name="fat">Fat</string>
-    <string name="start">Start</string>
+    <string name="start">Hungry</string>
+    <string name="food_advice">Food</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
