@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import timber.log.Timber
 
+//const val MY_KEY = "my_key"
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         val navController = this.findNavController(R.id.myNavHostFragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
+
+        // If there's data in the bundle
+        /*if(savedInstanceState != null) {
+            savedInstanceState.getInt(MY_KEY, 0)
+        }*/
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -73,15 +80,33 @@ class MainActivity : AppCompatActivity() {
         Timber.i("onRestart called")
     }
 
+    /**
+     * Called when the user navigates away from the app but might come back just after the activity goes through onStop
+     * e.g: Goes to another app or click the home button
+     *
+     * Its a callback where we can save data that we might need in case the os destroys the app
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        // If we forget tthe super here, the data is not saved to the bundle
+        super.onSaveInstanceState(outState)
+        Timber.i("onSaveInstanceState Called")
+
+        // bundle limit: around 100kb
+        // If we want to save data to the bundle when the app stops
+        //outState.putInt(MY_KEY, value)
+    }
+
     // onCreate only is called once when the activity is launched
 
     // onStart/onStop has to do with the visibility of the app (when it becomes visible and when it disappears)
     // onPause/onResume has to do with the focus of the app (If I can interact with the activity). It can also be visible in the background but the focus is on another thing - e.g: sharing
 
-    // Sharing: onPause Called, onResume Called
-    // Navigating to another app: onPause Called, onStop Called, onSaveInstanceState Called, onRestart Called, onStart Called, onResume Called
-    // Home button (Pause): onPause Called, onStop Called, onSaveInstanceState Called, onRestart Called, onStart Called, onResume Called
-    // Back button outside the app (Exit): onPause Called, onStop Called, onDestroy Called
+    // Sharing: onPause, onResume
+    // Navigating to another app (Pause): onPause, onStop, onSaveInstanceState, onRestart, onStart, onResume
+    // Home button (Pause): onPause, onStop, onSaveInstanceState, onRestart, onStart, onResume
+    // Back button outside the app (Exit): onPause, onStop, onDestroy
+    // Configuration change (rotation, user changes device language, users plus physical keyboard...)
+    // Rotating the screen: onPause, onStop, onDestroy, onCreate, onStart, onResume
 
     /*
     Lifecycle States
